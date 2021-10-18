@@ -7,7 +7,7 @@
 		<version>3.2.3.8</version>
 	</parent>
 
-	<groupId>Lippia-Web-Example-Project</groupId>
+	<groupId>Practica-Lippia-Web-Joel</groupId>
 	<artifactId>LippiaWebExampleProject</artifactId>
 	<version>1.0.0</version>
 	<name>crowdar_automation_web</name>
@@ -34,15 +34,15 @@
 		<crowdar.cucumber.option>src/test/resources/web/features ${cucumber.hooks} ${cucumber.stepsDefinitions} --tags 'not @Ignore' ${cucumber.tags} ${cucumber.reporters}</crowdar.cucumber.option>
 
 		<!-- client project custom properties -->
-		<web-app.url>http://www.google.com.ar</web-app.url>
+		<web-app.url>http://automationpractice.com/index.php</web-app.url>
 
 	</properties>
 	<profiles>
-	
+
 		<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 		<!--    Profiles related to Browser requirementes    -->
 		<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-		
+
 		<profile>
 			<id>chrome</id>
 			<activation>
@@ -61,7 +61,7 @@
 				<crowdar.driver.capabilities.json_path>src/main/resources/browsers/firefoxCapabilities.json</crowdar.driver.capabilities.json_path>
 			</properties>
 		</profile>
-		
+
 		<profile>
 			<id>chromeHeadless</id>
 			<properties>
@@ -73,7 +73,7 @@
 		<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 		<!--   Profiles related to Driver Instance petition   -->
 		<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-		
+
 		<profile>
 			<id>local</id>
 			<activation>
@@ -84,13 +84,27 @@
 			</properties>
 		</profile>
 
-				
-		<profile> 
+
+		<profile>
 			<id>stack_local</id>
 			<properties>
 				<crowdar.setupStrategy>web.SeleniumGridStrategy</crowdar.setupStrategy>
 				<!-- you can set your seleniumGrid url -->
 				<crowdar.driverHub>http://localhost:4444/wd/hub</crowdar.driverHub>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>secuencial</id>
+			<properties>
+				<runner>testngSecuencial.xml</runner>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>parallel</id>
+			<properties>
+				<runner>testngParallel.xml</runner>
 			</properties>
 		</profile>
 
