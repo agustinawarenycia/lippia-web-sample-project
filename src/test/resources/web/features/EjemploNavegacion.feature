@@ -1,7 +1,7 @@
 Feature: Como usuario, quiero realizar una búsqueda en la web Automation practice y poder logearme
 
   #Busqueda en el campo Search con su validacion
-
+  @Smoke @Agus
   Scenario: El usuario hace una busqueda
     Given que estoy en la pagina de web de Automation Practice
     When ingreso una busqueda dress
@@ -9,7 +9,7 @@ Feature: Como usuario, quiero realizar una búsqueda en la web Automation practi
 
 
   #Feature que me logea a la pagina
-
+  @Smoke @Agus
   Scenario Outline: El usuario hace un login
     Given que estoy en la pagina de web de Automation Practice
     When el usuario pulsa el botón "Sign in"
