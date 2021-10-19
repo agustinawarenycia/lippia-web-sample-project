@@ -5,7 +5,7 @@ Feature: Como usuario, quiero realizar una búsqueda en la web Automation practi
   Scenario: El usuario hace una busqueda
     Given que estoy en la pagina de web de Automation Practice
     When ingreso una busqueda dress
-    Then  la palabra 'dress' se busco realmente
+    Then  la palabra dress se busco realmente
 
 
   #Feature que me logea a la pagina
@@ -16,22 +16,23 @@ Feature: Como usuario, quiero realizar una búsqueda en la web Automation practi
     And  el usuario ingresa su usurio '<usuario>' y su contraseña '<contrasenia>'
     Then me redirige al inicio y verifico que se ha logeado correctamente
     Examples:
-      |usuario                     |contrasenia|
-      |warenycia.agustina@gmail.com|EstaEsUnaPrueba|
+      | usuario                      | contrasenia     |
+      | warenycia.agustina@gmail.com | EstaEsUnaPrueba |
 
 
 
 #Feature que me realiza la busqueda y comprueba que se encuentre en la pagina de busqueda
   @Smoke @Agus
-Scenario Outline: El usuario hace una busqueda
-  Given que estoy en la pagina de web de Automation Practice
-  When ingreso una busqueda  <busqueda>
-  Then la pagina me devuelve una vista y verifica los datos
-  Then  la palabra <busqueda> se busco realmente
-  Then selecciono los precios de menor a mayor
-  Then se valida que esten bien ordenados
+  Scenario Outline: El usuario hace una busqueda
+    Given que estoy en la pagina de web de Automation Practice
+    When ingreso una busqueda  <busqueda>
+    Then la pagina me devuelve una vista y verifica los datos
+    Then  la palabra <busqueda> se busco realmente
+    Then selecciono los precios de menor a mayor
+    Then se valida que esten bien ordenados
     Examples:
       | busqueda |
       |t-shirt   |
       |blouse     |
-      |dress      |
+      | dress    |
+      | short    |

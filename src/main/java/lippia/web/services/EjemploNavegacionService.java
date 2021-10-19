@@ -38,12 +38,14 @@ public class EjemploNavegacionService extends ActionManager {
 
     public static void validateBusqueda(String busqueda) {
         String obtenido = WebActionManager.getElement(EjemploNavegacionConstants.PALABRA_BUSCADA).getText().toLowerCase().replace("\"", "").replace(" ", ""); //pasa el string del locator todo a minuscula y saco las comillas
+        busqueda.replace("\"", "");
         Assert.assertEquals(busqueda, obtenido, "La palabra no coincide con la busqueda");
     }
 
     public static void busquedaMenorAMAyor() {
         click(EjemploNavegacionConstants.DROPDOWN);
-        WebActionManager.click(EjemploNavegacionConstants.DROPDOWN, "Price: Lowest first");
+        WebActionManager.click(EjemploNavegacionConstants.DROPDOWN_PRECIO_BAJO_XPATH, "Price: Lowest first");
+        //WebActionManager.setDropdownByText(EjemploNavegacionConstants.DROPDOWN_PRECIO_BAJO_XPATH, "Price: Lowest first");
     }
 
     public static void validatePrecios() {
