@@ -33,6 +33,6 @@ Feature: Como usuario, quiero realizar una búsqueda en la web Automation practi
     Examples:
       | busqueda |
       |t-shirt   |
-      |blouse     |
-      | dress    |
+      |blouse    |
+     # | dress    |
       | short    |
