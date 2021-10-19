@@ -21,7 +21,7 @@ public class EjemploNavegacionService extends ActionManager {
 
     public static void ingresarLaBusqueda(String text) {
 
-        setInput(EjemploNavegacionConstants.INPUT_SEARCH_XPATH, text);
+        setInput(EjemploNavegacionConstants.INPUT_SEARCH_XPATH,text);
     }
 
     public static void clickSearchButton() {
@@ -37,7 +37,7 @@ public class EjemploNavegacionService extends ActionManager {
     }
 
     public static void validateBusqueda(String busqueda) {
-        String obtenido = WebActionManager.getElement(EjemploNavegacionConstants.PALABRA_BUSCADA).getText().toLowerCase().replace("\"", ""); //pasa el string del locator todo a minuscula,
+        String obtenido = WebActionManager.getElement(EjemploNavegacionConstants.PALABRA_BUSCADA).getText().toLowerCase().replace("\"", "").replace(" ", ""); //pasa el string del locator todo a minuscula y saco las comillas
         Assert.assertEquals(busqueda, obtenido, "La palabra no coincide con la busqueda");
     }
 
@@ -53,7 +53,8 @@ public class EjemploNavegacionService extends ActionManager {
         double precio = 0;
 
         for (WebElement precios : listaDePrecios) {
-           precio = convertStringToDouble(precios.getText());
+          precio = convertStringToDouble(precios.getText());
+
            Assert.assertTrue(aux<precio, "No esta ordenado");
            aux=precio;
 
@@ -65,5 +66,16 @@ public class EjemploNavegacionService extends ActionManager {
         texto=texto.replace("$", "");
         return Double.valueOf(texto);
     }
+
+    public static void ingresoUsuarioYContrasenia(String email, String password){
+        setInput(EjemploPracticaConstants.INPUT_ADDRESS_XPATH, email );
+        setInput(EjemploNavegacionConstants.INPUT_PASSWORD_XPATH, password);
+        click(EjemploPracticaConstants.BUTTON_SIGNIN_XPATH);
+
+    }
+    public static void validateLogin(){
+        waitVisibility(EjemploNavegacionConstants.SPAN_VERIFICAR_LOGIN_XPATH);
+        Assert.assertTrue(isVisible(EjemploNavegacionConstants.SPAN_VERIFICAR_LOGIN_XPATH));
+            }
 
 }

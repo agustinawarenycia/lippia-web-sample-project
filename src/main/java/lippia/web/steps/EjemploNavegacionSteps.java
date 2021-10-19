@@ -1,6 +1,7 @@
 package lippia.web.steps;
 
 import com.crowdar.core.PageSteps;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -16,7 +17,7 @@ public class EjemploNavegacionSteps extends PageSteps {
         EjemploNavegacionService.navegarWeb();
     }
 
-    @When("^ingreso una busqueda de vestido (.*)$")
+    @When("^ingreso una busqueda  \"(.*)\"$")
     public void ingresoUnaBusquedaDeVestido(String text) {
         EjemploNavegacionService.ingresarLaBusqueda(text);
         EjemploNavegacionService.clickSearchButton();
@@ -28,8 +29,8 @@ public class EjemploNavegacionSteps extends PageSteps {
         EjemploNavegacionService.verificaResultados();
     }
 
-    @Then("^la palabra (.*) se busco realmente$")
-    public void laPalabraBusquedaSeBuscoRealmente(String busqueda) {
+    @Then("^la palabra \"(.*)\" se busco realmente$")
+    public void  laPalabraBusquedaSeBuscoRealmente(String busqueda) {
         EjemploNavegacionService.validateBusqueda(busqueda);
     }
 
@@ -43,4 +44,35 @@ public class EjemploNavegacionSteps extends PageSteps {
     public void seValidaQueEstenBienOrdenados() {
         EjemploNavegacionService.validatePrecios();
     }
+
+
+//Steps del logeo
+
+
+    @And("^el usuario ingresa su usurio '(.*)' y su contraseña '(.*)'$")
+    public void elUsuarioIngresaSuUsurioUsuarioYSuContraseñaContrasenia(String usuario, String contrasenia) {
+        EjemploNavegacionService.ingresoUsuarioYContrasenia(usuario,contrasenia);
+    }
+
+    @Then("me redirige al inicio y verifico que se ha logeado correctamente")
+    public void meRedirigeAlInicioYVerificoQueSeHaLogeadoCorrectamente() {
+        EjemploNavegacionService.validateLogin();
+    }
+
+    @When("^ingreso una busqueda (.*)$")
+    public void ingresoUnaBusqueda(String text) {
+        EjemploNavegacionService.ingresarLaBusqueda(text);
+        EjemploNavegacionService.clickSearchButton();
+    }
+
+    @Then("^la palabra (.*) se busco realmente$")
+    public void laPalabraDressSeBuscoRealmente(String text) {
+        EjemploNavegacionService.validateBusqueda(text);
+    }
+
+
+
+
+//Nuevo when para la busqueda de una palabra en especifico
+
 }
