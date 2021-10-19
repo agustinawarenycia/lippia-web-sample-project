@@ -32,6 +32,6 @@ Scenario Outline: El usuario hace una busqueda
   Then se valida que esten bien ordenados
     Examples:
       | busqueda |
-     # |t-shirt   |
-      #|blouse     |
+      |t-shirt   |
+      |blouse     |
       |dress      |
