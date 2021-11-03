@@ -1,13 +1,13 @@
 package lippia.web.steps;
 
 import com.crowdar.core.PageSteps;
+import com.crowdar.core.actions.WebActionManager;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import lippia.web.constants.EjemploNavegacionConstants;
 import lippia.web.services.EjemploNavegacionService;
-import lippia.web.services.EjemploPracticaService;
 import org.testng.Assert;
 
 import java.util.Objects;
@@ -27,10 +27,7 @@ public class EjemploNavegacionSteps extends PageSteps {
     }
 
 
-    @Then("la pagina me devuelve una vista y verifica los datos")
-    public void laPaginaMeDevuelveUnaVistaYVerificaLosDatos() {
-        EjemploNavegacionService.verificaResultados();
-    }
+
 
     @Then("^la palabra \"(.*)\" se busco realmente$")
     public void  laPalabraBusquedaSeBuscoRealmente(String busqueda) {
@@ -38,14 +35,13 @@ public class EjemploNavegacionSteps extends PageSteps {
     }
 
 
-    @Then("selecciono los precios de menor a mayor")
-    public void seleccionoLosPreciosDeMenorAMayor() {
-        EjemploNavegacionService.busquedaMenorAMAyor();
-    }
+
 
     @Then("se valida que esten bien ordenados")
     public void seValidaQueEstenBienOrdenados() {
         EjemploNavegacionService.validatePrecios();
+        WebActionManager.waitVisibility(EjemploNavegacionConstants.LISTA_PRECIOS);
+
     }
 
 
@@ -57,9 +53,10 @@ public class EjemploNavegacionSteps extends PageSteps {
         EjemploNavegacionService.ingresoUsuarioYContrasenia(usuario,contrasenia);
     }
 
-    @Then("me redirige al inicio y verifico que se ha logeado correctamente")
+    @Then("verifico que se ha logeado correctamente y me deslogueo")
     public void meRedirigeAlInicioYVerificoQueSeHaLogeadoCorrectamente() {
         EjemploNavegacionService.validateLogin();
+        EjemploNavegacionService.logOut();
     }
 
     @When("^ingreso una busqueda (.*)$")
@@ -68,16 +65,27 @@ public class EjemploNavegacionSteps extends PageSteps {
         EjemploNavegacionService.clickSearchButton();
     }
 
+
+
+    @When("^el usuario pulsa el botón \"(.*)\"$")
+    public void elUsuarioPulsaElBotón(String boton) {
+        EjemploNavegacionService.clickButton();
+        EjemploNavegacionService.verificarSignInPage();
+    }
     @Then("^la palabra (.*) se busco realmente$")
     public void laPalabraDressSeBuscoRealmente(String text) {
-        //EjemploNavegacionService.validateBusqueda(text);
-        if(Objects.equals(text, "dress"))
-            Assert.assertTrue(true);
+        EjemploNavegacionService.validateBusqueda(text);
+       // if(Objects.equals(text, "dress"))
+        //    Assert.assertTrue(true);
     }
 
 
 
+    @And("la pagina me muestra los resultados, verificaa (.*) y selecciono los precios de menor a mayor")
+    public void laPaginaMeMuestraLosResultadosVerificaaBusquedaYSeleccionoLosPreciosDeMenorAMayor(String text) {
+        EjemploNavegacionService.verificaResultados();
+        EjemploNavegacionService.validateBusqueda(text);
+        EjemploNavegacionService.busquedaMenorAMAyor();
 
-//Nuevo when para la busqueda de una palabra en especifico
-
+    }
 }

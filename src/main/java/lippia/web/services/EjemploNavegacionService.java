@@ -4,7 +4,6 @@ import com.crowdar.core.PropertyManager;
 import com.crowdar.core.actions.ActionManager;
 import com.crowdar.core.actions.WebActionManager;
 import lippia.web.constants.EjemploNavegacionConstants;
-import lippia.web.constants.EjemploPracticaConstants;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
@@ -30,8 +29,6 @@ public class EjemploNavegacionService extends ActionManager {
     }
 
     public static void verificaResultados() {
-        //waitVisibility(EjemploNavegacionConstants.RESULTADO_BUSQUEDA);
-        //Assert.assertTrue(isVisible(EjemploNavegacionConstants.RESULTADO_BUSQUEDA));
         waitVisibility(EjemploNavegacionConstants.SPAN_SEARCH);
         Assert.assertEquals(getText(EjemploNavegacionConstants.SPAN_SEARCH), "Search", "No esta en la pagina de bsuqueda");
     }
@@ -45,7 +42,7 @@ public class EjemploNavegacionService extends ActionManager {
     public static void busquedaMenorAMAyor() {
         click(EjemploNavegacionConstants.DROPDOWN);
         WebActionManager.click(EjemploNavegacionConstants.DROPDOWN_PRECIO_BAJO_XPATH, "Price: Lowest first");
-        //WebActionManager.setDropdownByText(EjemploNavegacionConstants.DROPDOWN_PRECIO_BAJO_XPATH, "Price: Lowest first");
+
     }
 
     public static void validatePrecios() {
@@ -70,9 +67,9 @@ public class EjemploNavegacionService extends ActionManager {
     }
 
     public static void ingresoUsuarioYContrasenia(String email, String password){
-        setInput(EjemploPracticaConstants.INPUT_ADDRESS_XPATH, email );
+        setInput(EjemploNavegacionConstants.INPUT_ADDRESS_XPATH, email );
         setInput(EjemploNavegacionConstants.INPUT_PASSWORD_XPATH, password);
-        click(EjemploPracticaConstants.BUTTON_SIGNIN_XPATH);
+        WebActionManager.click(EjemploNavegacionConstants.BOTON_LOGIN);
 
     }
     public static void validateLogin(){
@@ -80,4 +77,18 @@ public class EjemploNavegacionService extends ActionManager {
         Assert.assertTrue(isVisible(EjemploNavegacionConstants.SPAN_VERIFICAR_LOGIN_XPATH));
             }
 
+
+    public static void clickButton(){
+        click(EjemploNavegacionConstants.BUTTON_SIGNIN_XPATH);
+    }
+    public static void verificarSignInPage(){
+        waitVisibility(EjemploNavegacionConstants.INPUT_ADDRESS_XPATH);
+        Assert.assertTrue(isVisible(EjemploNavegacionConstants.INPUT_ADDRESS_XPATH));
+        waitVisibility(EjemploNavegacionConstants.H1_TITULO_XPATH);
+        Assert.assertEquals(getText(EjemploNavegacionConstants.H1_TITULO_XPATH),"AUTHENTICATION","No se encuentra el titulo");
+    }
+
+    public static void logOut() {
+        WebActionManager.click(EjemploNavegacionConstants.LOG_OUT_BUTON);
+    }
 }
